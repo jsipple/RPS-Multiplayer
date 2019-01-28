@@ -49,6 +49,18 @@ $("#submit").on("click", function(event) {
  alert("lobby is full")
 }
 })
+
+$("#sendMessage").on("click", function() {
+ let message = $("#chat").val().trim();
+ console.log(message)
+ database.ref().push({
+  message: message
+ })
+})
+// right now appending
+database.ref().on("child_added", function(snapshot) {
+ $("#chatbox").val(snapshot.val().message)
+})
 // need to add names to the above and wins, ties and losses and also put what they picked so i can compare later
 // need to add chat that also logs the time(hours and min) as well as names and whatever typed
 // when player enters name it updates the above objects and puts them in player1 or player2 if player1 already has a player

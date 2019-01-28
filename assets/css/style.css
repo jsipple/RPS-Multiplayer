@@ -7,8 +7,10 @@
  text-align: center;
 }
 #chat {
- margin: 0 auto;
+ height: 30px;
+ width: 300px;
 }
 #chatbox {
  align-content: center;
+ width: 50vw; 
 }
