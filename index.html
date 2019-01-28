@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <title>Trivia game</title>
+</head>
+<body>
+ <div id="username">
+ <label for="username">Input your username below</label>
+ <br>
+ <input type="text" id="text">
+ <button type="submit" id="submit">submit</button>
+ </div>
+  <div class="container">
+    <div class="row">
+      <div class="col box">
+       <!-- need to input username and 3 choices as well as wins losses and ties -->
+        1 of 3
+      </div>
+      <div class="col-6 box">
+        2 of 3 (wider)
+      </div>
+      <div class="col box">
+        3 of 3
+      </div>
+    </div>
+    <div class="row">
+    <textarea name="" id="chatbox" cols="80" rows="10"></textarea>
+    <br>
+    <input type="text" id="chat" placeholder="enter your message here">
+    </div>
+ <script src="./assets/javascript/app.js"></script>
+</body>
+</html>
