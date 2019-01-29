@@ -9,31 +9,34 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <title>Trivia game</title>
 </head>
 <body>
  <div id="username">
- <label for="username">Input your username below</label>
+ <label for="username" class="temp">Input your username below</label>
  <br>
- <input type="text" id="text">
- <button type="submit" id="submit">submit</button>
+ <input type="text" class="temp" id="text">
+ <button type="submit" id="submitUserName" class="temp">submit</button>
  </div>
   <div class="container">
     <div class="row">
       <div class="col box">
+       <button id="player1">Join</button>
        <!-- need to input username and 3 choices as well as wins losses and ties -->
-        1 of 3
       </div>
       <div class="col-6 box">
-        2 of 3 (wider)
       </div>
       <div class="col box">
-        3 of 3
+       <button id="player2">Join</button>
       </div>
     </div>
     <div class="row">
      <div class="col-8">
-    <textarea name="" id="chatbox"></textarea>
+       <div class="form-group shadow-textarea" id="chatbox">
+         <textarea class="form-control z-depth-1" rows="3"></textarea>
+       </div>
+      
      </div>
      </div>
      <div class="row">

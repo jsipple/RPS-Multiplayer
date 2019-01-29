@@ -10,57 +10,57 @@ firebase.initializeApp(config);
 
 let database = firebase.database();
 // change this to firebase as that's where this should be pulled from
-let player1 = {
- username: null,
- wins: 0,
- losses: 0,
- ties: 0
-}
-let player2 = {
- username: null,
- wins: 0,
- losses: 0,
- ties: 0
-}
+let username;
+let message;
 
-$("#submit").on("click", function(event) {
- event.preventDefault();
- if (player1.username === null && player2.username === null) {
-  player1.username = $("#text").val().trim();
-  player1.wins = 0;
-  player1.losses = 0;
-  player1.ties = 0;
-  database.ref().push({
-   player1: player1
-  })
- }
- // this overrides player1 right now pushing solves that
- else if (player2.username === null && player1.username !== null) {
-  player2.username = $("#text").val().trim();
-  console.log($("#text").val().trim())
-  player2.wins = 0;
-  player2.losses = 0;
-  player2.ties = 0;
-  database.ref().push({
-   player2: player2
-  })
- }
- else {
- alert("lobby is full")
-}
-})
-
-$("#sendMessage").on("click", function() {
- let message = $("#chat").val().trim();
- console.log(message)
- database.ref().push({
-  message: message
+$("#submitUserName").on("click", function() {
+ username = $("#text").val().trim()
+ $(".temp").fadeOut()
+ database.ref().child("chat").set({
+  username: username
  })
 })
-// right now appending
-database.ref().on("child_added", function(snapshot) {
- $("#chatbox").val(snapshot.val().message)
+$("#sendMessage").on("click", function() {
+ message = $("#chat").val().trim()
+  database.ref().child("chat").push({
+   message: message,
+   user: username,
+   time: moment().format("hh:mm")
+  })
 })
+
+database.ref().child("chat").on("child_added", function(snapshot) {
+ let name = $("<div>").addClass("name").text("(" + snapshot.val().time + ") " + snapshot.val().user + ": " + snapshot.val().message)
+ $("#chatbox").append(name)
+})
+
+$("#player1").on("click", function() {
+ $("#player1").fadeOut()
+  database.ref().child("player1").set({
+   username: username,
+   losses: 0,
+   wins: 0,
+   ties: 0
+  })
+})
+// need to make when log out gets deleted
+$("#player2").on("click", function() {
+ $("#player2").fadeOut()
+  database.ref().child("player2").set({
+   username: username,
+   losses: 0,
+   wins: 0,
+   ties: 0
+  })
+})
+// right now appending
+
+// might do fadeout too so can't try to have multiple users on one browser window
+// var userId = firebase.auth().currentUser.uid;
+// return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+//   // ...
+// });
 // need to add names to the above and wins, ties and losses and also put what they picked so i can compare later
 // need to add chat that also logs the time(hours and min) as well as names and whatever typed
 // when player enters name it updates the above objects and puts them in player1 or player2 if player1 already has a player
