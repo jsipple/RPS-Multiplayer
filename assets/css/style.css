@@ -1,7 +1,7 @@
 .box {
  margin: 20px;
  border: 2px solid red;
- height: 100px;
+ height: 300px;
 }
 #username {
  text-align: center;
@@ -13,4 +13,14 @@
 #chatbox {
  align-content: center;
  width: 50vw; 
+ border: 1px solid black;
+ height: 200px;
+ overflow-y: scroll;
+}
+
+#player1 {
+ display:none;
+}
+#player2 {
+ display: none;
 }

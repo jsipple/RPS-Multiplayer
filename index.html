@@ -17,24 +17,32 @@
  <label for="username" class="temp">Input your username below</label>
  <br>
  <input type="text" class="temp" id="text">
- <button type="submit" id="submitUserName" class="temp">submit</button>
+ <button type="submit" id="submitUserName" class="temp" onclick="choice()">submit</button>
  </div>
   <div class="container">
     <div class="row">
-      <div class="col box">
+      <div class="col box" id="user1">
+        <div id="user1name"></div>
        <button id="player1">Join</button>
+       <div id="score1">
+
+       </div>
        <!-- need to input username and 3 choices as well as wins losses and ties -->
       </div>
       <div class="col-6 box">
+        <div id="annonce"></div>
       </div>
-      <div class="col box">
+      <div class="col box" id="user2">
+        <div id="user2name"></div>
        <button id="player2">Join</button>
+       <div id="score2">
+
+       </div>
       </div>
     </div>
     <div class="row">
      <div class="col-8">
        <div class="form-group shadow-textarea" id="chatbox">
-         <textarea class="form-control z-depth-1" rows="3"></textarea>
        </div>
       
      </div>
