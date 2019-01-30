@@ -19,7 +19,7 @@ let user2Losses = 0
 let user2Ties = 0
 let user2Wins = 0
 let user1Ties = 0
-let user1Wins = 5
+let user1Wins = 0
 let rock1 = $("<button>").text("rock").addClass("rock1").on("click", function() {
   database.ref().child("choice1").set({
     choice: "rock"
@@ -135,7 +135,7 @@ $("#submitUserName").on("click", function() {
  })
  database.ref("player1").on("value", function(snapshot) {
   user1 = snapshot.val().username
-  if (user1 == null) {
+  if (snapshot.val().username == null) {
     $("#player1").show()
     console.log("a")
   }
@@ -144,12 +144,15 @@ $("#submitUserName").on("click", function() {
    }
  })
  database.ref("player2").on("value", function(snapshot) {
-  user2 = snapshot.val().username
    if (user2 == null && user1 !== null) {
-    $("#player2").show();
-    console.log("a")
+    user2 = snapshot.val().username
   }
  })
+})
+database.ref("player1").on("value", function(snapshot) {
+  if (user1 !== null && user2 === null) {
+    $("#player2").show()
+  }
 })
 $("#sendMessage").on("click", function() {
  message = $("#chat").val().trim()
@@ -171,7 +174,7 @@ database.ref().child("chat").on("child_added", function(snapshot) {
 
 // window.onbeforeunload set the player you are = to null so if (user === snapshot.val().child("player1").user == username 
 
-// need to figure out user1 first then can do a function if
+// need to figure out q first then can do a function if
 // window.onbeforeunload = function 
 
 
@@ -219,8 +222,9 @@ $("#player2").on("click", function() {
   
 })
 
-// will have a bug if multiple users of the same name so need to fix that
-// i can also make a log out button with similar function
+//TODO: will have a bug if multiple users of the same name so need to fix that might be wierd but could add a timestamp when created to and compare that just go down to miliseconds in case two people join at the same time 
+// i can also make a log out button with similar function 
+// TODO: seems to also log you out when you go out of the window
 window.addEventListener("beforeunload", function() {
   if (username = user1) {
     database.ref().child("player1").update({
@@ -235,6 +239,7 @@ window.addEventListener("beforeunload", function() {
 })
 // this click not doing anything
 
+// TODO: make it turn based
 
 // right now appending
 
