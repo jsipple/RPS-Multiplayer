@@ -19,7 +19,7 @@ let user2Losses = 0
 let user2Ties = 0
 let user2Wins = 0
 let user1Ties = 0
-let user1Wins = 0
+let user1Wins = 5
 let rock1 = $("<button>").text("rock").addClass("rock1").on("click", function() {
   database.ref().child("choice1").set({
     choice: "rock"
