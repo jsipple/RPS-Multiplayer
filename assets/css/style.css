@@ -18,9 +18,6 @@
  overflow-y: scroll;
 }
 
-#player1 {
- display:none;
-}
-#player2 {
- display: none;
+#join {
+    display: none;
 }

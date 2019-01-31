@@ -130,6 +130,7 @@ database.ref().child("choice2").on("value", function(snapshot) {
 $("#submitUserName").on("click", function() {
  username = $("#text").val().trim()
  $(".temp").fadeOut()
+ $("#join").show()
  database.ref().child("chat").set({
   username: username
  })
@@ -181,27 +182,32 @@ database.ref().child("chat").on("child_added", function(snapshot) {
 // if (user === snapshot.val().child("player2").user === username))
 // if undefined don't send message
 
-$("#player1").on("click", function() {
- $("#player1").hide()
- $("#player2").hide()
- $("#user1").append(rock1, paper1, sissors1)
-  database.ref().child("player1").set({
-   username: username,
-   losses: user1Losses,
-   wins: user1Wins,
-   ties: user1Ties
-  })
-  // this is not setting it for other windows not going trough
-  database.ref().child("player1").on("value", function(snapshot) {
-    $("#user1name").text(snapshot.val().username)
-    $("#score1").html("<p>losses: " + snapshot.val().losses + "</p>" + "<p>wins: " + snapshot.val().wins +"</p>" + "<p>ties: " + snapshot.val().ties + "</p>")
-  })
+$("#join").on("click", function() {
+  if (user1 == null) {
+    database.ref().child("player1").set({
+      username: username,
+      losses: user1Losses,
+      wins: user1Wins,
+      ties: user1Ties
+     })
+} else if (user1 != null && user2 == null) {
+  database.ref().child("player2").set({
+    username: username,
+    losses: user2Losses,
+    wins: user2Wins,
+    ties: user2Ties
+   })
+}
 })
-
-database.ref().child("player2").on("child_added", function(snapshot) {
-  // not setting this
+database.ref().child("player1").on("value", function(snapshot) {
+      user1 = snapshot.val().username
+  $("#user1name").text(snapshot.val().username)
+  $("#score1").html("<p>losses: " + snapshot.val().losses + "</p>" + "<p>wins: " + snapshot.val().wins +"</p>" + "<p>ties: " + snapshot.val().ties + "</p>")
+})
+database.ref().child("player2").on("value", function(snapshot) {
   user2 = snapshot.val().username
-  console.log(user1)
+$("#user2name").text(snapshot.val().username)
+$("#score2").html("<p>losses: " + snapshot.val().losses + "</p>" + "<p>wins: " + snapshot.val().wins +"</p>" + "<p>ties: " + snapshot.val().ties + "</p>")
 })
 
 
