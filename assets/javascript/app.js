@@ -63,6 +63,7 @@ database.ref().child("choice2").on("value", function(snapshot) {
   database.ref().child("choice1").on("value", function(snapshot) {
     choice1 = snapshot.val().choice
   })
+  $("#annonce").text(`${user1} chose ${choice1} ${user2} chose ${choice2}`)
   if (choice1 !== null && choice2 !== null) {
   if (choice1 === "rock") {
     if (choice2 === "rock") {
@@ -125,6 +126,10 @@ database.ref().child("choice2").on("value", function(snapshot) {
         choice: null
       })
     }
+    $("#choice2").hide()
+    if(username == username) {
+    $("#choice1").show()
+    }
 })
 
 $("#submitUserName").on("click", function() {
@@ -136,6 +141,7 @@ $("#submitUserName").on("click", function() {
  })
  database.ref("player1").on("value", function(snapshot) {
   user1 = snapshot.val().username
+  $("#annonce").text(`waiting for another player to join`)
   if (snapshot.val().username == null) {
     $("#player1").show()
     console.log("a")
@@ -212,6 +218,7 @@ $("#score2").html("<p>losses: " + snapshot.val().losses + "</p>" + "<p>wins: " +
 database.ref().child("choice1").once("value", function(snapshot) {
   if(snapshot.val() == null && username === user1) {
     $("#choice1").append(rock1,paper1,sissors1)
+    $("#annonce").text(`waiting on ${user1}`)
   }
 })
 }
@@ -220,8 +227,16 @@ database.ref().child("choice1").on("value", function(snapshot) {
   if (snapshot.val().choice != null && username === user2) {
     $("#choice2").append(rock2, paper2, sissors2)
     $("#choice1").hide()
+    $("#choice2").show()
+    $("#annonce").text(`waiting on ${user2}`)
   }
 })
+
+// when doing the second game the buttons on the left side do not work
+// also should get rid of join button or move it
+// want to integrate authentication as well if possible probably just use anonomous
+// add more things in annonce box at each step
+// got it working for one turn need to extend that
 
 
 // need to make when log out gets deleted
@@ -244,6 +259,9 @@ database.ref().child("choice1").on("value", function(snapshot) {
 //TODO: will have a bug if multiple users of the same name so need to fix that might be wierd but could add a timestamp when created to and compare that just go down to miliseconds in case two people join at the same time 
 // i can also make a log out button with similar function 
 // TODO: seems to also log you out when you go out of the window
+
+
+// seems to be working for user1 but not user2
 window.addEventListener("beforeunload", function() {
   if (username = user1) {
     database.ref().child("player1").update({
