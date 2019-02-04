@@ -232,6 +232,8 @@ database.ref().child("choice1").on("value", function(snapshot) {
   }
 })
 
+
+
 // when doing the second game the buttons on the left side do not work
 // also should get rid of join button or move it
 // want to integrate authentication as well if possible probably just use anonomous
@@ -269,7 +271,7 @@ window.addEventListener("beforeunload", function() {
     })
   }
   if (username = user2) {
-    database.ref().child("player1").update({
+    database.ref().child("player2").update({
       username: null
     })
   }
